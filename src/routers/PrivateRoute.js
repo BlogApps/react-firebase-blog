@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
-import AdminHeader from '../components/Admin/AdminHeader/AdminHeader'
+import AdminHeader from '../components/admin/AdminHeader/AdminHeader'
 
 const PrivateRoute = ({
   isAuthenticated,
