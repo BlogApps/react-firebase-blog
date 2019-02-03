@@ -30,17 +30,28 @@ const renderApp = () => {
 ReactDOM.render(<LoadingPage />, document.getElementById('app'))
 
 firebase.auth().onAuthStateChanged((user) => {
+  // ログイン実行時
   if (user) {
     store.dispatch(login(user.uid))
     store.dispatch(startSetNotes()).then(() => {
       renderApp()
-      if (history.location.pathname === '/') {
+      if (history.location.pathname === '/login') {
         history.push('/dashboard')
       }
     })
-  } else {
+  // ログイン画面への遷移時
+  } else if (history.location.pathname === '/login') {
     store.dispatch(logout())
     renderApp()
     history.push('/login')
+  // ログアウト実行時
+  } else if (history.location.pathname === '/dashboard') {
+    store.dispatch(logout())
+    renderApp()
+    history.push('/login')
+  } else {
+    store.dispatch(logout())
+    renderApp()
+    history.push('/')
   }
 })
